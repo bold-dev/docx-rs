@@ -18,7 +18,7 @@ mod text;
 
 pub use self::{
     body::*, bookmark_end::*, bookmark_start::*, grid_column::*, hyperlink::*, paragraph::*,
-    r#break::*, run::*, table::*, table::*, table_cell::*, table_grid::*, table_row::*, text::*,
+    r#break::*, run::*, table::*, table_cell::*, table_grid::*, table_row::*, text::*,
 };
 
 use std::io::Write;

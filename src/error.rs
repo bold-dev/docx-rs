@@ -3,30 +3,17 @@ use std::io::Error as IOError;
 use strong_xml::XmlError;
 use zip::result::ZipError;
 
+use thiserror::Error;
+
 /// Error type of docx-rs
-#[derive(Debug)]
+#[derive(Error, Debug)]
 pub enum DocxError {
-    IO(IOError),
-    Xml(XmlError),
-    Zip(ZipError),
-}
-
-impl From<IOError> for DocxError {
-    fn from(err: IOError) -> Self {
-        DocxError::IO(err)
-    }
-}
-
-impl From<XmlError> for DocxError {
-    fn from(err: XmlError) -> Self {
-        DocxError::Xml(err)
-    }
-}
-
-impl From<ZipError> for DocxError {
-    fn from(err: ZipError) -> Self {
-        DocxError::Zip(err)
-    }
+    #[error("io error")]
+    IO(#[from] IOError),
+    #[error("xml error")]
+    Xml(#[from] XmlError),
+    #[error("zip error")]
+    Zip(#[from] ZipError),
 }
 
 /// Specialized `Result` which the error value is `DocxError`.
